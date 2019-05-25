@@ -51,6 +51,7 @@ public class ItemListFragment extends Fragment {
 
         MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         viewModel.products.observe(this, products -> adapter.setItems(products));
+        viewModel.fetch();
 
     }
 

@@ -7,10 +7,23 @@ public class Product {
     private List<String> photoUrl;
     private String title;
     private int price;
-    private Map<Integer, Integer> stars;
+    private Map<String, Integer> stars;
     private List<String> options;
     private String detail;
     private String maker;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "photoUrl=" + photoUrl +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", stars=" + stars +
+                ", options=" + options +
+                ", detail='" + detail + '\'' +
+                ", maker='" + maker + '\'' +
+                '}';
+    }
 
     public List<String> getPhotoUrl() {
         return photoUrl;
@@ -36,11 +49,11 @@ public class Product {
         this.price = price;
     }
 
-    public Map<Integer, Integer> getStars() {
+    public Map<String, Integer> getStars() {
         return stars;
     }
 
-    public void setStars(Map<Integer, Integer> stars) {
+    public void setStars(Map<String, Integer> stars) {
         this.stars = stars;
     }
 
