@@ -42,9 +42,10 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        getSupportFragmentManager().beginTransaction()
+        //->nav_graph.xml 에 ItemListFragment를 시작지점으로 등록해두었기 때문에 필요없는 코드다.
+        /*getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container,new ItemListFragment())
-                .commit();
+                .commit();*/
     }
 
     @Override

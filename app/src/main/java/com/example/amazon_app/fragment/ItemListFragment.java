@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.amazon_app.R;
@@ -43,13 +43,25 @@ public class ItemListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        MainViewModel viewModel = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
+
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         ProductAdapter adapter = new ProductAdapter(product -> {
-            Toast.makeText(requireActivity(), "onclick!", Toast.LENGTH_SHORT).show();
+            viewModel.selectedProduct = product;
+
+            //마찬가지로 nav_graph.xml 에 ItemDetailFragment()와 연결시켜두었다.필요없는 코드
+            /*requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, new ItemDetailFragment())
+                    .addToBackStack(null)
+                    .commit();*/
+
+            //navigation code!!
+            Navigation.findNavController(view).navigate(R.id.action_itemListFragment_to_itemDetailFragment);
         });
         recyclerView.setAdapter(adapter);
 
-        MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
         viewModel.products.observe(this, products -> adapter.setItems(products));
         viewModel.fetch();
 

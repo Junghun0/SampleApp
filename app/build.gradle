@@ -45,5 +45,11 @@ dependencies {
     //firebase
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.google.firebase:firebase-firestore:19.0.0'
+
+    //navigation
+    def nav_version = "2.1.0-alpha04"
+
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
 }
 apply plugin: 'com.google.gms.google-services'
