@@ -11,11 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.amazon_app.R;
 import com.example.amazon_app.databinding.ItemProductBinding;
 import com.example.amazon_app.model.Product;
+import com.example.amazon_app.model.viewmodels.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,14 +49,9 @@ public class ItemListFragment extends Fragment {
         });
         recyclerView.setAdapter(adapter);
 
-        List<Product> products = new ArrayList<>();
-        Product product = new Product();
-        product.setDetail("detaildetaildetaildetaildetail");
-        product.setMaker("makermakermakermakermakermaker");
-        product.setPrice(1200000);
-        product.setTitle("This is title!!This is title!!This is title!!This is title!!");
-        products.add(product);
-        adapter.setItems(products);
+        MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        viewModel.products.observe(this, products -> adapter.setItems(products));
+
     }
 
     private static class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>{
