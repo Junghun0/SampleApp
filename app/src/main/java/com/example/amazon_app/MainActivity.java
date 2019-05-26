@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.amazon_app.fragment.ItemDetailFragment;
 import com.example.amazon_app.fragment.ItemListFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -48,6 +49,10 @@ public class MainActivity extends AppCompatActivity
         //Navigation과 NavigationDrawer 연결
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navigationView,navController);
+
+        //bottomNavigation 연결 / menu의 id 를 같게해서 연결
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         //->nav_graph.xml 에 ItemListFragment를 시작지점으로 등록해두었기 때문에 필요없는 코드다.
         /*getSupportFragmentManager().beginTransaction()
