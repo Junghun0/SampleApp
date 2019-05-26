@@ -27,11 +27,9 @@ import java.util.List;
  */
 public class ItemListFragment extends Fragment {
 
-
     public ItemListFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +45,9 @@ public class ItemListFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         ProductAdapter adapter = new ProductAdapter(product -> {
-            viewModel.selectedProduct = product;
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(ItemDetailFragment.KEY_PRODUCT, product);
+
 
             //마찬가지로 nav_graph.xml 에 ItemDetailFragment()와 연결시켜두었다.필요없는 코드
             /*requireActivity().getSupportFragmentManager()
@@ -57,7 +57,7 @@ public class ItemListFragment extends Fragment {
                     .commit();*/
 
             //navigation code!!
-            Navigation.findNavController(view).navigate(R.id.action_itemListFragment_to_itemDetailFragment);
+            Navigation.findNavController(view).navigate(R.id.action_itemListFragment_to_itemDetailFragment, bundle);
         });
         recyclerView.setAdapter(adapter);
 

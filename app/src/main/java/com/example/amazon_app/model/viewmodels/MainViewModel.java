@@ -14,8 +14,6 @@ public class MainViewModel extends ViewModel {
     public MutableLiveData<List<Product>> products = new MutableLiveData<>();
     private static final String TAG = "FirebaseFireStore!";
 
-    public Product selectedProduct;
-
     public void fetch(){
         FirebaseFirestore.getInstance().collection("item")
                 .get()

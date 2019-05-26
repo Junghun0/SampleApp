@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.amazon_app.fragment.ItemDetailFragment;
 import com.example.amazon_app.fragment.ItemListFragment;
@@ -41,6 +44,10 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Navigation과 NavigationDrawer 연결
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupWithNavController(navigationView,navController);
 
         //->nav_graph.xml 에 ItemListFragment를 시작지점으로 등록해두었기 때문에 필요없는 코드다.
         /*getSupportFragmentManager().beginTransaction()

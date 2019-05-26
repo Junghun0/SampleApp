@@ -1,14 +1,17 @@
 package com.example.amazon_app.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Product {
-    private List<String> photoUrl;
+public class Product implements Serializable {
+    private ArrayList<String> photoUrl;
     private String title;
     private int price;
-    private Map<String, Integer> stars;
-    private List<String> options;
+    private HashMap<String, Integer> stars;
+    private ArrayList<String> options;
     private String detail;
     private String maker;
 
@@ -25,11 +28,11 @@ public class Product {
                 '}';
     }
 
-    public List<String> getPhotoUrl() {
+    public ArrayList<String> getPhotoUrl() {
         return photoUrl;
     }
 
-    public void setPhotoUrl(List<String> photoUrl) {
+    public void setPhotoUrl(ArrayList<String> photoUrl) {
         this.photoUrl = photoUrl;
     }
 
@@ -53,7 +56,7 @@ public class Product {
         return stars;
     }
 
-    public void setStars(Map<String, Integer> stars) {
+    public void setStars(HashMap<String, Integer> stars) {
         this.stars = stars;
     }
 
@@ -61,7 +64,7 @@ public class Product {
         return options;
     }
 
-    public void setOptions(List<String> options) {
+    public void setOptions(ArrayList<String> options) {
         this.options = options;
     }
 
