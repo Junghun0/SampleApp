@@ -9,7 +9,7 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_cart"
+        android:id="@+id/cartFragment"
         android:title="@string/cart"
         android:icon="@drawable/cart"
         android:orderInCategory="101"

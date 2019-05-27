@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Product implements Serializable {
     private ArrayList<String> photoUrl;
@@ -82,5 +83,24 @@ public class Product implements Serializable {
 
     public void setMaker(String maker) {
         this.maker = maker;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return price == product.price &&
+                Objects.equals(photoUrl, product.photoUrl) &&
+                Objects.equals(title, product.title) &&
+                Objects.equals(stars, product.stars) &&
+                Objects.equals(options, product.options) &&
+                Objects.equals(detail, product.detail) &&
+                Objects.equals(maker, product.maker);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(photoUrl, title, price, stars, options, detail, maker);
     }
 }

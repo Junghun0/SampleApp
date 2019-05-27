@@ -12,7 +12,6 @@ import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.amazon_app.R;
@@ -51,18 +50,19 @@ public class ItemListFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 
         ProductAdapter adapter = new ProductAdapter(product -> {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(ItemDetailFragment.KEY_PRODUCT, product);
-
-            //마찬가지로 nav_graph.xml 에 ItemDetailFragment()와 연결시켜두었다.필요없는 코드
-            /*requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.container, new ItemDetailFragment())
-                    .addToBackStack(null)
-                    .commit();*/
-
-            //navigation code!!
-            Navigation.findNavController(view).navigate(R.id.action_itemListFragment_to_itemDetailFragment, bundle);
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable(ItemDetailFragment.KEY_PRODUCT, product);
+//
+//            //마찬가지로 nav_graph.xml 에 ItemDetailFragment()와 연결시켜두었다.필요없는 코드
+//            /*requireActivity().getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.container, new ItemDetailFragment())
+//                    .addToBackStack(null)
+//                    .commit();*/
+//
+//            //navigation code!!
+//            Navigation.findNavController(view).navigate(R.id.action_itemListFragment_to_itemDetailFragment, bundle);
+            viewModel.addCart(product);
         });
         recyclerView.setAdapter(adapter);
 

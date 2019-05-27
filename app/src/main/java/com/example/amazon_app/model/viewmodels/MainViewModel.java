@@ -3,6 +3,7 @@ package com.example.amazon_app.model.viewmodels;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.amazon_app.model.CartItem;
 import com.example.amazon_app.model.Product;
 
 import java.util.ArrayList;
@@ -13,9 +14,11 @@ public class MainViewModel extends ViewModel {
     private List<Product> products = new ArrayList<>();
     public MutableLiveData<List<Product>> filteredProducts = new MutableLiveData<>();
     public MutableLiveData<Boolean> isRefreshing = new MutableLiveData<>();
+    public MutableLiveData<List<CartItem>> cart = new MutableLiveData<>();
 
     public MainViewModel(){
         isRefreshing.setValue(false);
+        cart.setValue(new ArrayList<>());
     }
 
     public void fetch(){
@@ -29,6 +32,7 @@ public class MainViewModel extends ViewModel {
             photoUrl.add("https://images-na.ssl-images-amazon.com/images/I/51OjlqFbhTL._SL1024_.jpg");
             product1.setPrice(2990000);
             product1.setPhotoUrl(photoUrl);
+            product1.setTitle("Test title");
             dummyList.add(product1);
         }
         products = dummyList;
@@ -57,5 +61,15 @@ public class MainViewModel extends ViewModel {
             }
         }
         filteredProducts.setValue(filteredList);
+    }
+
+    public void addCart(Product item){
+        cart.getValue().add(new CartItem(item,1));
+        cart.setValue(cart.getValue());
+    }
+
+    public void removeCart(Product item){
+        cart.getValue().remove(item);
+        cart.setValue(cart.getValue());
     }
 }

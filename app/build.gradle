@@ -56,3 +56,4 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.0.0-alpha04'
 }
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'realm-android'
