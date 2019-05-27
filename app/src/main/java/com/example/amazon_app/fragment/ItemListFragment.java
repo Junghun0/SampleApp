@@ -44,8 +44,11 @@ public class ItemListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         FragmentItemListBinding binding = DataBindingUtil.bind(view);
         MainViewModel viewModel = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+
         ProductAdapter adapter = new ProductAdapter(product -> {
             Bundle bundle = new Bundle();
             bundle.putSerializable(ItemDetailFragment.KEY_PRODUCT, product);
@@ -61,15 +64,16 @@ public class ItemListFragment extends Fragment {
             Navigation.findNavController(view).navigate(R.id.action_itemListFragment_to_itemDetailFragment, bundle);
         });
         recyclerView.setAdapter(adapter);
+
+        /*->databinding adapter 를 사용해 마찬가지로 코드를 줄였다.
         //Data set
         viewModel.products.observe(this, products -> {
             adapter.setItems(products);
         });
-
-        //새로고침
+        ->databinding adapter를 사용해 xml에서 isrefreshing을 observe 하고 있다.
         viewModel.isRefreshing.observe(this, isRefreshing -> {
             binding.swipeRefreshLayout.setRefreshing(isRefreshing);
-        });
+        });*/
 
         //swiperefreshlayout
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
@@ -81,7 +85,7 @@ public class ItemListFragment extends Fragment {
 
     }
 
-    private static class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>{
+    public static class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>{
         private List<Product> mItems = new ArrayList<>();
 
         interface OnProductItemClickListener{
