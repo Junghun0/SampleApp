@@ -9,21 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
-    public MutableLiveData<List<Product>> products = new MutableLiveData<>();
     private static final String TAG = "FirebaseFireStore!";
+    public MutableLiveData<List<Product>> products = new MutableLiveData<>();
+    public MutableLiveData<Boolean> isRefreshing = new MutableLiveData<>();
+
+    public MainViewModel(){
+        isRefreshing.setValue(false);
+    }
 
     public void fetch(){
+        isRefreshing.setValue(true);
         ArrayList<Product> dummyList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 5; i++) {
             Product product1 = new Product();
-            ArrayList<String> photoUrls = new ArrayList<>();
-            photoUrls.add("https://m.media-amazon.com/images/I/61iVOmuO1pL._AC_UL872_QL65_.jpg");
-            photoUrls.add("https://images-na.ssl-images-amazon.com/images/I/614XgOF31AL._SL1024_.jpg");
-            photoUrls.add("https://images-na.ssl-images-amazon.com/images/I/51OjlqFbhTL._SL1024_.jpg");
+            ArrayList<String> photoUrl = new ArrayList<>();
+            photoUrl.add("https://m.media-amazon.com/images/I/61iVOmuO1pL._AC_UL872_QL65_.jpg");
+            photoUrl.add("https://images-na.ssl-images-amazon.com/images/I/614XgOF31AL._SL1024_.jpg");
+            photoUrl.add("https://images-na.ssl-images-amazon.com/images/I/51OjlqFbhTL._SL1024_.jpg");
             product1.setPrice(2990000);
+            product1.setPhotoUrl(photoUrl);
             dummyList.add(product1);
         }
         products.setValue(dummyList);
+        isRefreshing.setValue(false);
 //        FirebaseFirestore.getInstance().collection("item")
 //                .get()
 //                .addOnCompleteListener(task -> {

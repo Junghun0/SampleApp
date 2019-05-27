@@ -20,7 +20,6 @@ import com.example.amazon_app.databinding.FragmentItemDetailBinding;
 import com.example.amazon_app.databinding.ItemPhotoBinding;
 import com.example.amazon_app.model.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,7 +72,7 @@ public class ItemDetailFragment extends Fragment {
 
     private static class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder> {
 
-        private List<String> mItems = new ArrayList<>();
+        private List<String> mItems;
 
         public PhotoAdapter(List<String> mItems) {
             this.mItems = mItems;

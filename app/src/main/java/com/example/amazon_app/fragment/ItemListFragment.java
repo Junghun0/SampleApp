@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.amazon_app.R;
+import com.example.amazon_app.databinding.FragmentItemListBinding;
 import com.example.amazon_app.databinding.ItemProductBinding;
 import com.example.amazon_app.model.Product;
 import com.example.amazon_app.model.viewmodels.MainViewModel;
@@ -41,13 +42,13 @@ public class ItemListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        FragmentItemListBinding binding = DataBindingUtil.bind(view);
         MainViewModel viewModel = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         ProductAdapter adapter = new ProductAdapter(product -> {
             Bundle bundle = new Bundle();
             bundle.putSerializable(ItemDetailFragment.KEY_PRODUCT, product);
-
 
             //마찬가지로 nav_graph.xml 에 ItemDetailFragment()와 연결시켜두었다.필요없는 코드
             /*requireActivity().getSupportFragmentManager()
@@ -60,9 +61,22 @@ public class ItemListFragment extends Fragment {
             Navigation.findNavController(view).navigate(R.id.action_itemListFragment_to_itemDetailFragment, bundle);
         });
         recyclerView.setAdapter(adapter);
+        //Data set
+        viewModel.products.observe(this, products -> {
+            adapter.setItems(products);
+        });
 
+        //새로고침
+        viewModel.isRefreshing.observe(this, isRefreshing -> {
+            binding.swipeRefreshLayout.setRefreshing(isRefreshing);
+        });
 
-        viewModel.products.observe(this, products -> adapter.setItems(products));
+        //swiperefreshlayout
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
+            viewModel.fetch();//-> data의 변경이 있을 때 새로고침 끔
+        });
+
+        //Data 받아오기
         viewModel.fetch();
 
     }
