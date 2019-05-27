@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -78,6 +79,22 @@ public class ItemListFragment extends Fragment {
         //swiperefreshlayout
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
             viewModel.fetch();//-> data의 변경이 있을 때 새로고침 끔
+        });
+
+        //searchView
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //searchView의 내용으로 검색을 수행할 때 호출됨
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //서치뷰의 글자가 변경될 때마다 호출됨
+                viewModel.search(newText);
+                return true;
+            }
         });
 
         //Data 받아오기

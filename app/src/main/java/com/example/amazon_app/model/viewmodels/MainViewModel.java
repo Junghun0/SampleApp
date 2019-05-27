@@ -10,7 +10,8 @@ import java.util.List;
 
 public class MainViewModel extends ViewModel {
     private static final String TAG = "FirebaseFireStore!";
-    public MutableLiveData<List<Product>> products = new MutableLiveData<>();
+    private List<Product> products = new ArrayList<>();
+    public MutableLiveData<List<Product>> filteredProducts = new MutableLiveData<>();
     public MutableLiveData<Boolean> isRefreshing = new MutableLiveData<>();
 
     public MainViewModel(){
@@ -30,7 +31,8 @@ public class MainViewModel extends ViewModel {
             product1.setPhotoUrl(photoUrl);
             dummyList.add(product1);
         }
-        products.setValue(dummyList);
+        products = dummyList;
+        filteredProducts.setValue(dummyList);
         isRefreshing.setValue(false);
 //        FirebaseFirestore.getInstance().collection("item")
 //                .get()
@@ -44,4 +46,16 @@ public class MainViewModel extends ViewModel {
 //                });
     }
 
+    public void search(String query) {
+        List<Product> productList = products;
+
+        List<Product> filteredList = new ArrayList<>();
+        for (int i = 0; i < productList.size(); i++) {
+            Product product = productList.get(i);
+            if (product.getTitle().toLowerCase().trim().contains(query.toLowerCase().trim())){
+                filteredList.add(product);
+            }
+        }
+        filteredProducts.setValue(filteredList);
+    }
 }
