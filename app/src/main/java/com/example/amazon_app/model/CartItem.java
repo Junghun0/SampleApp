@@ -1,16 +1,29 @@
 package com.example.amazon_app.model;
 
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.Objects;
 
-import io.realm.RealmObject;
+@Entity
+public class CartItem {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
-public class CartItem extends RealmObject {
+    @Embedded
     private Product product;
     private int count;
 
-    public CartItem(Product product, int count) {
-        this.product = product;
-        this.count = count;
+    public CartItem() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Product getProduct() {

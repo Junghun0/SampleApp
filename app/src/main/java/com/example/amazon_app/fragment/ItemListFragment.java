@@ -23,9 +23,7 @@ import com.example.amazon_app.model.viewmodels.MainViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class ItemListFragment extends Fragment {
 
     public ItemListFragment() {
@@ -48,8 +46,6 @@ public class ItemListFragment extends Fragment {
         binding.setLifecycleOwner(this);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-
-        ProductAdapter adapter = new ProductAdapter(product -> {
 //            Bundle bundle = new Bundle();
 //            bundle.putSerializable(ItemDetailFragment.KEY_PRODUCT, product);
 //
@@ -62,7 +58,8 @@ public class ItemListFragment extends Fragment {
 //
 //            //navigation code!!
 //            Navigation.findNavController(view).navigate(R.id.action_itemListFragment_to_itemDetailFragment, bundle);
-            viewModel.addCart(product);
+        ProductAdapter adapter = new ProductAdapter(item -> {
+            viewModel.addCart(item);
         });
         recyclerView.setAdapter(adapter);
 

@@ -31,14 +31,18 @@ public class BindingAdapters {
 
     @BindingAdapter("items")
     public static void items(RecyclerView recyclerView, List<Product> products) {
-        ItemListFragment.ProductAdapter adapter = (ItemListFragment.ProductAdapter) recyclerView.getAdapter();
-        adapter.setItems(products);
+        if (products != null){
+            ItemListFragment.ProductAdapter adapter = (ItemListFragment.ProductAdapter) recyclerView.getAdapter();
+            adapter.setItems(products);
+        }
     }
 
     @BindingAdapter("cart")
     public static void cart(RecyclerView recyclerView, List<CartItem> items){
-        CartFragment.CartAdapter adapter = (CartFragment.CartAdapter)recyclerView.getAdapter();
-        adapter.setItems(items);
+        if (items != null){
+            CartFragment.CartAdapter adapter = (CartFragment.CartAdapter) recyclerView.getAdapter();
+            adapter.setItems(items);
+        }
     }
 
     @BindingAdapter("count")
