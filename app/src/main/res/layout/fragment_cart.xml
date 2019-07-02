@@ -20,14 +20,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:count="@{viewModel.cart}"
-            android:text="수량" />
+            android:text="@string/amount" />
 
         <TextView
             android:id="@+id/total_price_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:price="@{viewModel.cart}"
-            android:text="총가격" />
+            android:text="@string/total_price" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
